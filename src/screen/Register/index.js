@@ -46,7 +46,7 @@ const index = ({ navigation }) => {
           <Text style={styles.text}>¿Ya tienes una cuenta?</Text>
           <TouchableOpacity
             style={styles.containerLink}
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('Login')}
           >
             <Text style={styles.link}> Inicia sesión</Text>
           </TouchableOpacity>
