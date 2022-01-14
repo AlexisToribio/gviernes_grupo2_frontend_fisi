@@ -66,4 +66,18 @@ export default styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
   },
+  textInscription: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 10,
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    color: '#404040',
+    backgroundColor: '#D9D6D6',
+    textAlign: 'center',
+  },
 });
