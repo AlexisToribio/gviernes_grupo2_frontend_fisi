@@ -1,6 +1,6 @@
-import { TextInput, View } from 'react-native';
-import styles from './styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { TextInput, View } from "react-native";
+import styles from "./styles";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const index = ({ icon, type }) => {
   return (
@@ -9,7 +9,7 @@ const index = ({ icon, type }) => {
       <TextInput
         style={styles.input}
         maxLength={50}
-        secureTextEntry={type == 'password' ? true : false}
+        secureTextEntry={type == "password" ? true : false}
       />
     </View>
   );
