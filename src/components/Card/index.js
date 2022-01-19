@@ -2,7 +2,14 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const index = ({ image, title, date, price, inscription, navigation }) => {
+const index = ({
+  image,
+  title,
+  date,
+  price,
+  inscription = true,
+  navigation,
+}) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -15,7 +22,7 @@ const index = ({ image, title, date, price, inscription, navigation }) => {
         <Text style={styles.text}>{date}</Text>
       </View>
 
-      {inscription === true ? (
+      {inscription ? (
         <View style={styles.footer}>
           <Text style={styles.text}>
             Precio: <Text style={styles.price}>{price}</Text>

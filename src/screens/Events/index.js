@@ -51,7 +51,6 @@ const index = () => {
               title={card.title}
               date={card.date}
               price={card.price}
-              inscription={card.inscription}
               key={card.key}
             />
           );

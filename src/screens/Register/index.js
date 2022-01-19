@@ -10,7 +10,7 @@ import { Input, Title, Button, AuthLayout } from "../../components";
 import styles from "./styles";
 
 const index = ({ navigation }) => {
-  const onPress = () => navigation.navigate("Login");
+  const onPress = () => navigation.navigate("Home");
   return (
     <AuthLayout
       title="Regístrate"
@@ -39,7 +39,7 @@ const index = ({ navigation }) => {
         <Text style={styles.label}>Confirmar contraseña</Text>
         <Input icon="lock" type="password" />
       </View>
-      <Button onPress={onPress}>Register</Button>
+      <Button onPress={onPress}>Registrate</Button>
     </AuthLayout>
   );
 };
