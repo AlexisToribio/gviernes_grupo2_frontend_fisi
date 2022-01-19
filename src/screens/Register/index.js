@@ -5,54 +5,42 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
-import { Input, Title, Button } from '../../components';
-import styles from './styles';
+} from "react-native";
+import { Input, Title, Button, AuthLayout } from "../../components";
+import styles from "./styles";
 
 const index = ({ navigation }) => {
+  const onPress = () => navigation.navigate("Login");
   return (
-    <ScrollView>
-      <ImageBackground
-        source={require('../../../assets/backgroundRegister.png')}
-        style={styles.container}
-      >
-        <Image
-          style={styles.image}
-          source={require('../../../assets/Logo.png')}
-        />
-        <Title>Regístrate</Title>
-        <View>
-          <Text style={styles.label}>Nombres</Text>
-          <Input icon="user" />
-        </View>
-        <View>
-          <Text style={styles.label}>Apellidos</Text>
-          <Input icon="user" />
-        </View>
-        <View>
-          <Text style={styles.label}>Correo</Text>
-          <Input icon="envelope" />
-        </View>
-        <View>
-          <Text style={styles.label}>Contraseña</Text>
-          <Input icon="lock" type="password" />
-        </View>
-        <View>
-          <Text style={styles.label}>Confirmar contraseña</Text>
-          <Input icon="lock" type="password" />
-        </View>
-        <Button>Regístrate</Button>
-        <View style={styles.signinLink}>
-          <Text style={styles.text}>¿Ya tienes una cuenta?</Text>
-          <TouchableOpacity
-            style={styles.containerLink}
-            onPress={() => navigation.navigate('Login')}
-          >
-            <Text style={styles.link}> Inicia sesión</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </ScrollView>
+    <AuthLayout
+      title="Regístrate"
+      redirection="Login"
+      redirectionTitle="¿Ya tienes una cuenta?"
+      textButton="Inicia sesión"
+      navigation={navigation}
+    >
+      <View>
+        <Text style={styles.label}>Nombres</Text>
+        <Input icon="user" />
+      </View>
+      <View>
+        <Text style={styles.label}>Apellidos</Text>
+        <Input icon="user" />
+      </View>
+      <View>
+        <Text style={styles.label}>Correo</Text>
+        <Input icon="envelope" />
+      </View>
+      <View>
+        <Text style={styles.label}>Contraseña</Text>
+        <Input icon="lock" type="password" />
+      </View>
+      <View>
+        <Text style={styles.label}>Confirmar contraseña</Text>
+        <Input icon="lock" type="password" />
+      </View>
+      <Button onPress={onPress}>Register</Button>
+    </AuthLayout>
   );
 };
 

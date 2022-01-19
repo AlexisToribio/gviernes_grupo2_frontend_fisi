@@ -1,8 +1,3 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-export default styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
-    alignItems: 'center',
-  },
-});
+export default styles = StyleSheet.create({});
