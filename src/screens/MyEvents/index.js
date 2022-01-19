@@ -1,4 +1,4 @@
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Text, Image } from 'react-native';
 import { Card } from '../../components';
 import styles from './styles';
 
@@ -9,7 +9,7 @@ const cardList = [
     title: 'Conferencia de Big Data',
     date: 'jueves 19 ago. - 8:00pm',
     price: 'Gratis',
-    inscription: false,
+    inscription: true,
     key: 1,
   },
   {
@@ -18,7 +18,7 @@ const cardList = [
     title: 'Conferencia de Big Data',
     date: 'jueves 19 ago. - 8:00pm',
     price: 'Gratis',
-    inscription: false,
+    inscription: true,
     key: 2,
   },
   {
@@ -26,7 +26,7 @@ const cardList = [
     title: 'Conferencia de Big Data',
     date: 'jueves 19 ago. - 8:00pm',
     price: 'Gratis',
-    inscription: false,
+    inscription: true,
     key: 3,
   },
   {
@@ -35,7 +35,7 @@ const cardList = [
     title: 'Conferencia de Big Data',
     date: 'jueves 19 ago. - 8:00pm',
     price: 'Gratis',
-    inscription: false,
+    inscription: true,
     key: 4,
   },
 ];
