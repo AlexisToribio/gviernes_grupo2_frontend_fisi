@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, Register, Home } from "../screens";
+import { Login, Register, Home, EventDetails } from "../screens";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +20,11 @@ export default function MyStack() {
         options={{ headerShown: false }}
         name="Home"
         component={Home}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="EventDetails"
+        component={EventDetails}
       />
     </Stack.Navigator>
   );

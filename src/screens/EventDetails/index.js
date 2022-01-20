@@ -1,4 +1,4 @@
-import { View, Text,Image, TextInput,ScrollView } from "react-native";
+import { View, Text,Image, TextInput,ScrollView, TouchableOpacity } from "react-native";
 import { HomeInput, HomeLayout} from "../../components";
 import styles from "./styles";
 
@@ -21,7 +21,7 @@ const InputLayout = ({ children, label }) => (
   
 );
 
-const index = () => {
+const index = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
@@ -32,12 +32,17 @@ const index = () => {
               source={require("../../../assets/Logo-min.png")}
             />
           </View>
-          <View style={styles.rowItem}>
-            <Image
-              style={styles.back}
-              source={require("../../../assets/back.png")}
-            />
-          </View>
+      
+            <TouchableOpacity onPress={() => navigation.navigate("Events")}>
+              <View  
+              style={styles.rowItem}>
+              <Image
+                style={styles.back}
+                source={require("../../../assets/back.png")}
+              />
+              </View>
+            </TouchableOpacity>
+          
         </View>     
       </View>
       

@@ -40,7 +40,7 @@ const cardList = [
   },
 ];
 
-const index = () => {
+const index = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -52,6 +52,7 @@ const index = () => {
               date={card.date}
               price={card.price}
               key={card.key}
+              navigation={navigation}
             />
           );
         })}
