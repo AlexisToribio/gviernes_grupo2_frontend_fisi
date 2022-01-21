@@ -31,25 +31,17 @@ const index = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
-        <View style={styles.rowContainer}>
-          <View style={styles.rowItem}>
-            <Image
-              style={styles.logo}
-              source={require("../../../assets/Logo-min.png")}
-            />
-          </View>
-
-          <TouchableOpacity onPress={() => navigation.navigate("Events")}>
-            <View style={styles.rowItem}>
-              <Image
-                style={styles.back}
-                source={require("../../../assets/back.png")}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            style={styles.back}
+            source={require("../../../assets/back.png")}
+          />
+        </TouchableOpacity>
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/Logo-min.png")}
+        />
       </View>
-
       <View style={styles.divisor}></View>
       <ScrollView>
         <Image

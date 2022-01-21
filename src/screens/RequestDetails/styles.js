@@ -8,7 +8,6 @@ export default styles = StyleSheet.create({
 
   containerHeader: {
     width: "100%",
-    paddingBottom: 70,
   },
   rowContainer: {
     flex: 1,
@@ -20,8 +19,8 @@ export default styles = StyleSheet.create({
   logo: {
     width: 120,
     height: 30,
+    marginTop: -30,
     marginLeft: 250,
-    marginTop: 40,
   },
   back: {
     marginTop: 40,
