@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
-
   container: {
     width: "100%",
     paddingBottom: 100,
@@ -9,20 +8,18 @@ export default styles = StyleSheet.create({
 
   containerHeader: {
     width: "100%",
-    paddingBottom: 70,
   },
   rowContainer: {
     flex: 1,
-    flexDirection: 'column',
   },
-  rowItem:{
-    flex: 1
+  rowItem: {
+    flex: 1,
   },
   logo: {
     width: 120,
     height: 30,
-    marginLeft: 250,
-    marginTop: 40,
+    marginLeft: 240,
+    marginTop: -30,
   },
   back: {
     marginTop: 40,
@@ -43,7 +40,7 @@ export default styles = StyleSheet.create({
     fontWeight: "bold",
   },
   portada: {
-    width: '100%',
+    width: "100%",
     height: 200,
   },
   containerInput: {

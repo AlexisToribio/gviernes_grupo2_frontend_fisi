@@ -29,7 +29,7 @@ const index = ({
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("Inscription")}
+            onPress={() => navigation.navigate("EventDetails")}
           >
             <Text style={styles.textButton}>Asistir</Text>
           </TouchableOpacity>

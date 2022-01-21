@@ -6,4 +6,5 @@ export { default as MyEvents } from "./MyEvents";
 export { default as EventRegister } from "./EventRegister";
 export { default as MyRequest } from "./MyRequest";
 export { default as Home } from "./Home";
-export { default as EventDetails } from "./EventDetails"
+export { default as EventDetails } from "./EventDetails";
+export { default as RequestDetails } from "./RequestDetails";
