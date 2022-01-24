@@ -1,10 +1,12 @@
-import { ScrollView, View, Text, Image } from "react-native";
-import styles from "./styles";
+import { ScrollView, View, Text, Image, TouchableOpacity } from 'react-native';
+import styles from './styles';
 
-const index = () => {
+const index = ({ navigation }) => {
   return (
     <ScrollView>
-      <Text>My requests</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('RequestDetails')}>
+        <Text style={{ marginTop: 100 }}>Hola</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
