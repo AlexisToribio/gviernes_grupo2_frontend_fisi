@@ -9,6 +9,7 @@ import {
   EventRegister,
   MyEvents,
   MyRequest,
+  RequestDetails,
 } from "../screens";
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,7 @@ const screenTabs = [
   {
     name: "UserDetails",
     component: UserDetails,
-    optionsTitle: "Detalles de Usuario",
+    optionsTitle: "Perfil de Usuario",
     key: 1,
   },
   {
@@ -40,7 +41,7 @@ const screenTabs = [
   },
   {
     name: "MyRequest",
-    component: MyRequest,
+    component: RequestDetails,
     optionsTitle: "Mis Solicitudes",
     key: 5,
   },

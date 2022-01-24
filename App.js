@@ -1,10 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
-import NavigationTab from './src/navigation/NavigationTab';
+import { NavigationContainer } from "@react-navigation/native";
+import NavigationStack from "./src/navigation/NavigationStack";
+import "react-native-gesture-handler";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <NavigationTab />
+      <NavigationStack />
     </NavigationContainer>
   );
 }

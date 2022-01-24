@@ -5,3 +5,4 @@ export { default as HomeLayout } from "./HomeLayout";
 export { default as HomeInput } from "./HomeInput";
 export { default as InputPicker } from "./InputPicker";
 export { default as Card } from "./Card";
+export { default as AuthLayout } from "./AuthLayout";
