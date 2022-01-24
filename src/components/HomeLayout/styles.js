@@ -27,8 +27,8 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
   title: {
-    fontFamily: "Roboto",
-    fontSize: 40,
+    fontSize: 21,
+    textAlign: "center",
     fontWeight: "bold",
   },
 });

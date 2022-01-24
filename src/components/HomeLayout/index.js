@@ -11,7 +11,7 @@ const index = ({ children, title }) => {
         />
       </View>
       <View style={styles.divisor}></View>
-      <Text styles={styles.title}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.divisorSecondary}></View>
       {children}
     </View>
