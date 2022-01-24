@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
     marginTop: 40,
@@ -14,25 +14,25 @@ export default styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 2,
     paddingLeft: 8,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   signinLink: {
     marginTop: 20,
     marginBottom: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   text: {
-    width: 'auto',
-    fontFamily: 'Roboto',
+    width: "auto",
+    fontFamily: "Roboto",
     fontSize: 18,
   },
   link: {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   div: {
     marginBottom: 30,

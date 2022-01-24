@@ -1,5 +1,5 @@
 import { ScrollView, View, Text, Image } from "react-native";
-import { Card } from "../../components";
+import { Card, HomeLayout } from "../../components";
 import styles from "./styles";
 
 const cardList = [
@@ -40,25 +40,27 @@ const cardList = [
   },
 ];
 
-const index = ({navigation}) => {
+const index = ({ navigation }) => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {cardList.map((card) => {
-          return (
-            <Card
-              image={card.image}
-              title={card.title}
-              date={card.date}
-              price={card.price}
-              inscription={card.inscription}
-              key={card.key}
-              navigation={navigation}
-            />
-          );
-        })}
-      </View>
-    </ScrollView>
+    <HomeLayout title="Mis eventos">
+      <ScrollView>
+        <View style={styles.container}>
+          {cardList.map((card) => {
+            return (
+              <Card
+                image={card.image}
+                title={card.title}
+                date={card.date}
+                price={card.price}
+                inscription={card.inscription}
+                key={card.key}
+                navigation={navigation}
+              />
+            );
+          })}
+        </View>
+      </ScrollView>
+    </HomeLayout>
   );
 };
 

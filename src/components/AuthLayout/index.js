@@ -34,7 +34,7 @@ const index = ({
             style={styles.containerLink}
             onPress={() => navigation.navigate(redirection)}
           >
-            <Text style={styles.link}>{textButton}</Text>
+            <Text style={styles.link}> {textButton}</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

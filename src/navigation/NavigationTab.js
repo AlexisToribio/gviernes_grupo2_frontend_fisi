@@ -41,7 +41,7 @@ const screenTabs = [
   },
   {
     name: "MyRequest",
-    component: RequestDetails,
+    component: MyRequest,
     optionsTitle: "Mis Solicitudes",
     key: 5,
   },
