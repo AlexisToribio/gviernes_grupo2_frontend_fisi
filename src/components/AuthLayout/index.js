@@ -5,9 +5,9 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-} from "react-native";
-import { Input, Title, Button } from "../../components";
-import styles from "./styles";
+} from 'react-native';
+import { Input, Title, Button } from '../../components';
+import styles from './styles';
 const index = ({
   children,
   title,
@@ -19,12 +19,12 @@ const index = ({
   return (
     <ScrollView>
       <ImageBackground
-        source={require("../../../assets/backgroundRegister.png")}
+        source={require('../../../assets/backgroundRegister.png')}
         style={styles.container}
       >
         <Image
           style={styles.image}
-          source={require("../../../assets/Logo.png")}
+          source={require('../../../assets/Logo.png')}
         />
         <Title>{title}</Title>
         {children}

@@ -1,16 +1,9 @@
-import {
-  Image,
-  Text,
-  ImageBackground,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import { Input, Title, Button, AuthLayout } from "../../components";
-import styles from "./styles";
+import { Text, View } from 'react-native';
+import { Input, Button, AuthLayout } from '../../components';
+import styles from './styles';
 
 const index = ({ navigation }) => {
-  const onPress = () => navigation.navigate("Register");
+  const onPress = () => navigation.navigate('Register');
   return (
     <AuthLayout
       title="Inicio de sesión"
