@@ -9,12 +9,10 @@ const index = ({
   price,
   inscription = true,
   navigation,
+  id,
 }) => {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => navigation.navigate("EventDetails")}
-    >
+    <View style={styles.container}>
       <Image source={{ uri: image }} style={styles.image} />
       <Text style={styles.title}>{title}</Text>
       <View style={styles.dateContainer}>
@@ -25,19 +23,27 @@ const index = ({
       {inscription ? (
         <View style={styles.footer}>
           <Text style={styles.text}>
-            Precio: <Text style={styles.price}>{price}</Text>
+            Precio:{" "}
+            <Text style={styles.price}>{!price ? " Gratis" : price}</Text>
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("EventDetails")}
+            onPress={() => navigation.navigate("EventDetails", { id })}
           >
             <Text style={styles.textButton}>Asistir</Text>
           </TouchableOpacity>
         </View>
       ) : (
-        <Text style={styles.textInscription}>Inscrito</Text>
+        <View style={{ marginTop: 20 }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("EventDetails", { id })}
+          >
+            <Text style={styles.textButton}>Ver detalles</Text>
+          </TouchableOpacity>
+        </View>
       )}
-    </TouchableOpacity>
+    </View>
   );
 };
 

@@ -1,10 +1,11 @@
 import { clientApi } from "../lib/axios";
 
-export const login = ({ data }) => {
+export const updateUserData = ({ id, token, data }) => {
   return clientApi
-    .post("/auth/login", data, {
+    .put(`/dashboard/profile/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
+        token,
       },
     })
     .then((res) => res.data);

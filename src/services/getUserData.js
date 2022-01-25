@@ -1,10 +1,10 @@
 import { clientApi } from "../lib/axios";
 
-export const login = ({ data }) => {
+export const getUserData = ({ token }) => {
   return clientApi
-    .post("/auth/login", data, {
+    .get("/auth/user", {
       headers: {
-        "Content-Type": "application/json",
+        token,
       },
     })
     .then((res) => res.data);

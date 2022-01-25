@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,7 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { HomeInput, HomeLayout } from "../../components";
+import { useUser } from "../../hooks/useUser";
+import { getEventDetails } from "../../services/getEventDetails";
 import styles from "./styles";
 
 const InputLayout = ({ children, label }) => (
@@ -27,7 +29,18 @@ const InputLayout = ({ children, label }) => (
   </View>
 );
 
-const index = ({ navigation }) => {
+const index = ({ navigation, route }) => {
+  const [{ token }, _] = useUser();
+  const [event, setEvent] = useState([]);
+  useEffect(() => {
+    getEventDetails({ token, id: route.params.id })
+      .then((res) => {
+        setEvent(res.event[0]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
@@ -51,31 +64,28 @@ const index = ({ navigation }) => {
             uri: "https://ipmark.com/wp-content/uploads/eventos-de-marketing-2021.jpg",
           }}
         />
-        <Text style={styles.title}>Nombre del Evento</Text>
+        <Text style={styles.title}>{event?.titulo}</Text>
         <View style={styles.divisor}></View>
 
         <InputLayout label="Descripcion">
-          <Text style={styles.containerInput}>
-            Lorem Ipsum ha sido el texto de relleno estándar de las industrias
-            desde el año 1500, cuando un impresor ...
-          </Text>
+          <Text style={styles.containerInput}>{event?.descripcion_evento}</Text>
         </InputLayout>
 
         <View style={{ flexDirection: "row", width: "100%" }}>
           <View style={{ width: "50%", marginRight: 5 }}>
             <InputLayout label="Fecha de Inicio">
-              <Text style={styles.containerInput}>9 de abril</Text>
+              <Text style={styles.containerInput}>{event?.fecha_inicio}</Text>
             </InputLayout>
           </View>
           <View style={{ width: "50%", paddingRight: 5 }}>
             <InputLayout label="Horario">
-              <Text style={styles.containerInput}>9:45pm</Text>
+              <Text style={styles.containerInput}>{event?.hora_inicio}</Text>
             </InputLayout>
           </View>
         </View>
 
         <InputLayout label="Certificado">
-          <Text style={styles.containerInput}>Si</Text>
+          <Text style={styles.containerInput}>{event?.tipo_certificado}</Text>
         </InputLayout>
 
         <View style={{ flexDirection: "row", width: "100%" }}>
@@ -83,7 +93,9 @@ const index = ({ navigation }) => {
             <InputLayout label="Nombre coordinador"></InputLayout>
           </View>
           <View style={{ width: "50%" }}>
-            <Text style={styles.containerInput}>Fernando Altamirano</Text>
+            <Text style={styles.containerInput}>
+              {event?.nombre_coordinador}
+            </Text>
           </View>
         </View>
 
@@ -92,7 +104,7 @@ const index = ({ navigation }) => {
             <InputLayout label="Ambiente"></InputLayout>
           </View>
           <View style={{ width: "50%" }}>
-            <Text style={styles.containerInput}>Aula Magna</Text>
+            <Text style={styles.containerInput}>{event?.tipo_ambiente}</Text>
           </View>
         </View>
       </ScrollView>

@@ -17,6 +17,7 @@ import { clientApi } from "../../lib/axios";
 import styles from "./styles";
 import { Picker } from "@react-native-picker/picker";
 import { sendEventRequest } from "../../services/sendEventRequest";
+import { useUser } from "../../hooks/useUser";
 
 const InputLayout = ({ children, label }) => (
   <View style={{ width: "100%" }}>
@@ -36,6 +37,7 @@ const InputLayout = ({ children, label }) => (
   </View>
 );
 const index = ({ navigation }) => {
+  const [{ token }, _] = useUser();
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
     titulo: "",
@@ -55,12 +57,14 @@ const index = ({ navigation }) => {
     participantes: 0,
     logo: "",
   });
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(token);
+  }, []);
 
   const handleSend = () => {
     const dataToSend = { ...data, logo: image };
     console.log(dataToSend);
-    sendEventRequest({ data: dataToSend, token: localStorage.getItem("token") })
+    sendEventRequest({ data: dataToSend, token })
       .then((data) => {
         console.log(data);
         if (data === "Event Registered and Request Created") {
@@ -283,7 +287,7 @@ const index = ({ navigation }) => {
             }}
           >
             <Button color="#F90909" title="Cancelar" />
-            <Button color="#09A305" title="Enviar" onPress={handleSend} />
+            <Button color="#5AD65A" title="Enviar" onPress={handleSend} />
           </View>
         </View>
       </ScrollView>
