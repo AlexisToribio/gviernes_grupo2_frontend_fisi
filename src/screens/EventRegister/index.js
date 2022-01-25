@@ -24,8 +24,8 @@ const InputLayout = ({ children, label }) => (
     {label && (
       <Text
         style={{
-          paddingBottom: 10,
-          paddingTop: 10,
+          paddingBottom: 15,
+          paddingTop: 15,
           marginLeft: 0,
           marginRight: "auto",
         }}
