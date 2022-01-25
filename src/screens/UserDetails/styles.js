@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
-
   container: {
     width: "100%",
     paddingBottom: 120,
@@ -26,8 +25,8 @@ export default styles = StyleSheet.create({
   },
   title: {
     fontSize: 21,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
   },
   containerUser: {
     flexDirection: "row",
@@ -39,20 +38,20 @@ export default styles = StyleSheet.create({
   logo_usuario: {
     width: 140,
     height: 140,
-
   },
   containerInput: {
     marginLeft: 25,
     marginRight: 25,
     marginBottom: 10,
     marginTop: 10,
+    borderColor: "black",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderRadius: 4,
   },
   input: {
     height: 40,
-    borderColor: "black",
-    borderWidth: 1,
     width: "100%",
-    borderRadius: 4,
     paddingLeft: 10,
   },
   label: {

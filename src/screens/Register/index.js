@@ -1,4 +1,4 @@
-import { createElement, useState } from "react";
+import { useState } from "react";
 import {
   Image,
   Text,
@@ -25,8 +25,10 @@ const index = ({ navigation }) => {
     console.log(data);
     userRegister({ data })
       .then((res) => {
-        if (res === "Register was successful") navigation.navigate("Login");
-        else alert("Datos inválidos");
+        if (res === "Register was successful") {
+          alert("Registro correcto");
+          navigation.navigate("Login");
+        } else alert("Datos inválidos");
       })
       .catch((err) => console.log(err.message));
   };
