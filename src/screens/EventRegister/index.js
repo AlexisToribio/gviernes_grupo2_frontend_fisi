@@ -1,8 +1,22 @@
 import { useState, useEffect, useRef } from "react";
-import { View, Text, Button, Picker, ScrollView } from "react-native";
-import { HomeInput, HomeLayout, InputPicker } from "../../components";
+import {
+  View,
+  Text,
+  Button,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import {
+  HomeInput,
+  HomeLayout,
+  ImagePicker,
+  InputPicker,
+} from "../../components";
 import { clientApi } from "../../lib/axios";
 import styles from "./styles";
+import { Picker } from "@react-native-picker/picker";
+import { sendEventRequest } from "../../services/sendEventRequest";
 
 const InputLayout = ({ children, label }) => (
   <View style={{ width: "100%" }}>
@@ -21,7 +35,8 @@ const InputLayout = ({ children, label }) => (
     {children}
   </View>
 );
-const index = () => {
+const index = ({ navigation }) => {
+  const [image, setImage] = useState(null);
   const [data, setData] = useState({
     titulo: "",
     tipo_coordinador: 0,
@@ -40,19 +55,27 @@ const index = () => {
     participantes: 0,
     logo: "",
   });
-  useEffect(() => {
-    clientApi
-      .get("/home")
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err.message));
-  }, []);
-
-  // const onChangeValue = (ev) =>
-  //   setData({ ...data, [ev.target.name]: ev.target.value });
+  useEffect(() => {}, []);
 
   const handleSend = () => {
-    console.log(data);
+    const dataToSend = { ...data, logo: image };
+    console.log(dataToSend);
+    sendEventRequest({ data: dataToSend, token: localStorage.getItem("token") })
+      .then((data) => {
+        console.log(data);
+        if (data === "Event Registered and Request Created") {
+          navigation.navigate("MyRequest");
+        } else {
+          console.log("error");
+        }
+      })
+      .catch((err) => console.error(err.message));
   };
+
+  const handleImageEvent = (result) => {
+    setImage(result.uri);
+  };
+  const removeImage = () => setImage(null);
   return (
     <HomeLayout title="Registrar evento">
       <ScrollView>
@@ -64,13 +87,20 @@ const index = () => {
           />
           <InputLayout label="Organizador">
             <View style={styles.picker}>
-              <Picker style={{ marginTop: -5 }}>
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="C++" value="C++" />
+              <Picker
+                style={{ marginTop: -5 }}
+                onValueChange={(value, i) =>
+                  setData({ ...data, tipo_coordinador: value })
+                }
+                selectedValue={data.tipo_coordinador}
+              >
+                <Picker.Item label="Individual" value={1} />
+                <Picker.Item label="Grupo" value={2} />
               </Picker>
             </View>
           </InputLayout>
           <HomeInput
+            placeholder="Grupo Pana"
             value={data.nombre_coordinador}
             onChange={(text) => setData({ ...data, nombre_coordinador: text })}
           />
@@ -79,37 +109,65 @@ const index = () => {
               <InputLayout label="Fecha de inicio">
                 <InputPicker
                   onChange={(text) => {
-                    console.log(text);
                     setData({ ...data, fecha_inicio: text });
                   }}
                   icon="calendar"
-                  type="datetime"
                 />
               </InputLayout>
             </View>
             <View style={{ width: "50%", paddingRight: 5 }}>
               <InputLayout label="Fecha de fin">
-                <InputPicker icon="calendar" type="datetime" />
+                <InputPicker
+                  onChange={(text) => {
+                    setData({ ...data, fecha_fin: text });
+                  }}
+                  icon="calendar"
+                />
               </InputLayout>
             </View>
           </View>
           <InputLayout label="Tipo de evento">
             <View style={styles.picker}>
-              <Picker style={{ marginTop: -5 }}>
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="C++" value="C++" />
+              <Picker
+                style={{ marginTop: -5 }}
+                onValueChange={(value, i) =>
+                  setData({ ...data, tipo_evento: value })
+                }
+                selectedValue={data.tipo_evento}
+              >
+                <Picker.Item label="Taller" value="E001" />
+                <Picker.Item label="Curso" value="E002" />
+                <Picker.Item label="Conferencia" value="E003" />
+                <Picker.Item label="Congreso" value="E004" />
+                <Picker.Item label="Seminario" value="E005" />
               </Picker>
             </View>
           </InputLayout>
           <View style={{ flexDirection: "row", width: "100%" }}>
             <View style={{ width: "50%", marginRight: 5 }}>
               <InputLayout label="Hora de inicio">
-                <InputPicker icon="time-slot" type="time" />
+                <InputPicker
+                  icon="time-slot"
+                  type="time"
+                  placeholder="12:00 am"
+                  formater="h:MM TT"
+                  formaterValue="h:MM"
+                  onChange={(text) => {
+                    setData({ ...data, hora_inicio: text });
+                  }}
+                />
               </InputLayout>
             </View>
             <View style={{ width: "50%", paddingRight: 5 }}>
               <InputLayout>
-                <HomeInput label="Duración" />
+                <HomeInput
+                  label="Duración"
+                  placeholder="2"
+                  keyboardType="numeric"
+                  onChange={(text) =>
+                    setData({ ...data, duracion: Number(text) })
+                  }
+                />
               </InputLayout>
             </View>
           </View>
@@ -117,46 +175,104 @@ const index = () => {
             <View style={{ width: "50%", marginRight: 5 }}>
               <InputLayout label="Inscripción">
                 <View style={styles.picker}>
-                  <Picker style={{ marginTop: -5 }}>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="C++" value="C++" />
+                  <Picker
+                    style={{ marginTop: -5 }}
+                    onValueChange={(value, i) =>
+                      setData({ ...data, tipo_inscripcion: value })
+                    }
+                    selectedValue={data.tipo_inscripcion}
+                  >
+                    <Picker.Item label="Gratuito" value={1} />
+                    <Picker.Item label="Pago" value={2} />
                   </Picker>
                 </View>
               </InputLayout>
             </View>
             <View style={{ width: "50%", paddingRight: 5 }}>
               <InputLayout>
-                <HomeInput label="Costo de inscripción" />
+                <HomeInput
+                  label="Costo de inscripción"
+                  keyboardType="numeric"
+                  placeholder="100"
+                  onChange={(text) =>
+                    setData({ ...data, precio_inscripcion: Number(text) })
+                  }
+                />
               </InputLayout>
             </View>
           </View>
           <View style={{ flexDirection: "row", width: "100%" }}>
             <View style={{ width: "50%", marginRight: 5 }}>
-              <InputLayout label="Certificado">
+              <InputLayout label="Tipo Certificado">
                 <View style={styles.picker}>
-                  <Picker style={{ marginTop: -5 }}>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="C++" value="C++" />
+                  <Picker
+                    style={{ marginTop: -5 }}
+                    onValueChange={(value, i) =>
+                      setData({ ...data, tipo_certificado: value })
+                    }
+                    selectedValue={data.tipo_certificado}
+                  >
+                    <Picker.Item label="Gratuito" value={1} />
+                    <Picker.Item label="Pago" value={2} />
+                    <Picker.Item label="No aplica" value={3} />
                   </Picker>
                 </View>
               </InputLayout>
             </View>
             <View style={{ width: "50%", paddingRight: 5 }}>
               <InputLayout>
-                <HomeInput label="Precio" />
+                <HomeInput
+                  keyboardType="numeric"
+                  label="Costo Certificado"
+                  placeholder="100"
+                  onChange={(text) =>
+                    setData({ ...data, precio_certificado: Number(text) })
+                  }
+                />
               </InputLayout>
             </View>
           </View>
           <InputLayout label="Ambiente">
             <View style={styles.picker}>
-              <Picker style={{ marginTop: -5 }}>
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="C++" value="C++" />
+              <Picker
+                style={{ marginTop: -5 }}
+                onValueChange={(value, i) =>
+                  setData({ ...data, tipo_ambiente: value })
+                }
+                selectedValue={data.tipo_ambiente}
+              >
+                <Picker.Item label="Auditoria" value="A001" />
+                <Picker.Item label="Aula Magna" value="A002" />
+                <Picker.Item label="Aula" value="A003" />
+                <Picker.Item label="Laboratorio" value="A004" />
+                <Picker.Item label="Exteriores" value="A005" />
               </Picker>
             </View>
           </InputLayout>
-          <HomeInput label="Imagen del evento" />
-          <HomeInput label="Descripción" />
+          <InputLayout label="Imagen del evento">
+            {!image ? (
+              <ImagePicker handleImage={handleImageEvent} />
+            ) : (
+              <>
+                <Image source={{ uri: image }} style={styles.image} />
+                <TouchableOpacity onPress={removeImage}>
+                  <Text style={styles.remove}>Eliminar image</Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </InputLayout>
+          <HomeInput
+            label="Cantidad máxima de asistentes"
+            keyboardType="numeric"
+            onChange={(text) =>
+              setData({ ...data, participantes: Number(text) })
+            }
+          />
+          <HomeInput
+            label="Descripción"
+            multiline={true}
+            onChange={(text) => setData({ ...data, descripcion: text })}
+          />
           <View
             style={{
               flexDirection: "row",

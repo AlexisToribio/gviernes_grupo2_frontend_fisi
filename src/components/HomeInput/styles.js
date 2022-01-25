@@ -14,6 +14,14 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     paddingLeft: 10,
   },
+  textarea: {
+    height: 80,
+    borderColor: "black",
+    borderWidth: 1,
+    width: "100%",
+    borderRadius: 4,
+    paddingLeft: 10,
+  },
   label: {
     paddingTop: 5,
     paddingBottom: 5,

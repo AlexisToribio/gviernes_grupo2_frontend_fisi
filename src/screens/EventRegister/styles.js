@@ -18,4 +18,15 @@ export default styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: "solid",
   },
+  image: {
+    width: "100%",
+    height: 120,
+    borderRadius: 4,
+    resizeMode: "stretch",
+  },
+  remove: {
+    color: "red",
+    marginTop: 7,
+    textAlign: "center",
+  },
 });

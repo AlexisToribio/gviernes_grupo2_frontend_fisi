@@ -8,11 +8,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { format } from "date-fns";
+import dateFormat from "dateformat";
 import { styles } from "./styles";
 import Icon from "react-native-vector-icons/Entypo";
 
-const index = ({ type = "date", icon, placeholder, onChange }) => {
+const index = ({
+  type = "date",
+  icon,
+  placeholder = "May 22th, 2022",
+  onChange,
+  formater = "mmmm dS, yyyy",
+  formaterValue = "yyyy-mm-dd",
+}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [value, setValue] = useState("");
   const showDatePicker = () => {
@@ -24,19 +31,20 @@ const index = ({ type = "date", icon, placeholder, onChange }) => {
   };
 
   const handleConfirm = (date) => {
-    setValue(format(new Date(date), "MMMM do, yyyy"));
+    const dateFormatted = dateFormat(new Date(date), formater);
+    const dateFormatted2 = dateFormat(new Date(date), formaterValue);
+    onChange(dateFormatted2);
+    setValue(dateFormatted);
     hideDatePicker();
   };
-  // useEffect(() => {
-  //   onChange(value);
-  // }, [value]);
+
   return (
     <>
       <View style={styles.pickerContainer}>
         <TextInput
           value={value}
           style={{ width: "80%", paddingLeft: 5 }}
-          placeholder="May 22th, 2022"
+          placeholder={placeholder}
         />
         <TouchableOpacity style={styles.button} onPress={showDatePicker}>
           <Icon name={icon} size={15} style={styles.icon} />
@@ -44,7 +52,7 @@ const index = ({ type = "date", icon, placeholder, onChange }) => {
       </View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode={type}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />

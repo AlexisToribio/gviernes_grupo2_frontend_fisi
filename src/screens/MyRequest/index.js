@@ -1,12 +1,12 @@
 import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
-import { AuthLayoutAlternative } from "../../components";
+import { HomeLayoutAlternative } from "../../components";
 import styles from "./styles";
 
 const index = ({ navigation }) => {
   return (
-    <AuthLayoutAlternative navigation={navigation}>
+    <HomeLayoutAlternative navigation={navigation}>
       <ScrollView>{/* AQUI VA TU CODIGO */}</ScrollView>
-    </AuthLayoutAlternative>
+    </HomeLayoutAlternative>
   );
 };
 

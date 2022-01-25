@@ -6,4 +6,5 @@ export { default as HomeInput } from "./HomeInput";
 export { default as InputPicker } from "./InputPicker";
 export { default as Card } from "./Card";
 export { default as AuthLayout } from "./AuthLayout";
-export { default as AuthLayoutAlternative } from "./HomeLayoutAlternative";
+export { default as HomeLayoutAlternative } from "./HomeLayoutAlternative";
+export { default as ImagePicker } from "./ImagePicker";
