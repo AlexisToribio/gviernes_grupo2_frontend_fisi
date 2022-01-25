@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { styles } from "./styles";
 import Icon from "react-native-vector-icons/Entypo";
 
-const index = ({ type = "date", icon, placeholder }) => {
+const index = ({ type = "date", icon, placeholder, onChange }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [value, setValue] = useState("");
   const showDatePicker = () => {
@@ -27,6 +27,9 @@ const index = ({ type = "date", icon, placeholder }) => {
     setValue(format(new Date(date), "MMMM do, yyyy"));
     hideDatePicker();
   };
+  // useEffect(() => {
+  //   onChange(value);
+  // }, [value]);
   return (
     <>
       <View style={styles.pickerContainer}>

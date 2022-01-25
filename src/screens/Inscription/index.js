@@ -9,7 +9,7 @@ import {
   ScrollView,
   Picker,
 } from "react-native";
-import { Input } from "../../components";
+import { HomeInput, HomeLayout, InputPicker } from "../../components";
 import styles from "./styles";
 import * as ImagePicker from "expo-image-picker";
 import { PickerItem } from "react-native/Libraries/Components/Picker/Picker";
@@ -70,41 +70,49 @@ const index = ({ navigation }) => {
             Eventos/Conferencia “Seeds for the Future”/Inscripción
           </Text>
         </View>
-        <View style={{margin: 10}}>
+        <View style={{marginTop: 30}}>
           <Text style={{textAlign: "left"}}>Inscripción al evento</Text>
         </View>
         <View style={{height: 5, backgroundColor: "gray"}}></View>
         <View style={styles.formItem}>
-          <Text>Nombres</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Nombres"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>Apellidos</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Apellidos"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>Correo</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Correo"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>DNI/Carné extranjería</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="DNI/Carné extranjería"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>Número de celular</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Número de celular"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>Sexo</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Sexo"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>Ocupación</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Ocupación"/>
+          </InputLayout>
         </View>
         <View style={styles.formItem}>
-          <Text>Edad</Text>
-          <Input></Input>
+          <InputLayout>
+            <HomeInput label="Edad"/>
+          </InputLayout>
         </View>
         <InputLayout label="Certificado" style={{width:"80%"}}>
           <View style={styles.picker}>

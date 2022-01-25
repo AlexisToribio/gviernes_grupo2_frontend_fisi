@@ -1,5 +1,5 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import {
   Login,
@@ -9,39 +9,40 @@ import {
   EventRegister,
   MyEvents,
   MyRequest,
-} from '../screens';
+  RequestDetails,
+} from "../screens";
 
 const Tab = createBottomTabNavigator();
 
 const screenTabs = [
   {
-    name: 'UserDetails',
+    name: "UserDetails",
     component: UserDetails,
-    optionsTitle: 'Perfil de Usuario',
+    optionsTitle: "Perfil de Usuario",
     key: 1,
   },
   {
-    name: 'Events',
+    name: "Events",
     component: Events,
-    optionsTitle: 'Eventos',
+    optionsTitle: "Eventos",
     key: 2,
   },
   {
-    name: 'MyEvents',
+    name: "MyEvents",
     component: MyEvents,
-    optionsTitle: 'Mis Eventos',
+    optionsTitle: "Mis Eventos",
     key: 3,
   },
   {
-    name: 'EventRegister',
+    name: "EventRegister",
     component: EventRegister,
-    optionsTitle: 'Registrar Evento',
+    optionsTitle: "Registrar Evento",
     key: 4,
   },
   {
-    name: 'MyRequest',
+    name: "MyRequest",
     component: MyRequest,
-    optionsTitle: 'Mis Solicitudes',
+    optionsTitle: "Mis Solicitudes",
     key: 5,
   },
 ];
@@ -53,28 +54,28 @@ const NavigationTab = () => {
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === 'UserDetails') {
-            iconName = 'user';
-          } else if (route.name === 'Events') {
-            iconName = 'calendar';
-          } else if (route.name === 'MyEvents') {
-            iconName = 'calendar-check-o';
-          } else if (route.name === 'EventRegister') {
-            iconName = 'file-text';
-          } else if (route.name === 'MyRequest') {
-            iconName = 'files-o';
+          if (route.name === "UserDetails") {
+            iconName = "user";
+          } else if (route.name === "Events") {
+            iconName = "calendar";
+          } else if (route.name === "MyEvents") {
+            iconName = "calendar-check-o";
+          } else if (route.name === "EventRegister") {
+            iconName = "file-text";
+          } else if (route.name === "MyRequest") {
+            iconName = "files-o";
           }
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "gray",
         headerShown: false,
         tabBarStyle: {
           height: 70,
           paddingTop: 10,
           paddingBottom: 10,
-          backgroundColor: '#11101D',
+          backgroundColor: "#11101D",
         },
       })}
     >

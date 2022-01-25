@@ -17,8 +17,11 @@ export default styles = StyleSheet.create({
      borderRadius: 5,
    },
   formItem:{
-    margin: 10,
-    padding: 5,
+    marginTop: 3,
+    marginBottom: 3,
+    paddingTop: 3,
+    paddingBottom:3,
+    width:"80%",
   },
   buttonText: { color: "black", fontSize: 20 },
   picker: {
