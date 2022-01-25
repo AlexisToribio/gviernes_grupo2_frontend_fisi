@@ -1,19 +1,11 @@
-<<<<<<< HEAD
-import { createStackNavigator } from '@react-navigation/stack';
-=======
 import { createStackNavigator } from "@react-navigation/stack";
->>>>>>> 123b7e2262be6def780a258e14178f06653e41a1
 import {
   Login,
   Register,
   Home,
   EventDetails,
   RequestDetails,
-<<<<<<< HEAD
-} from '../screens';
-=======
 } from "../screens";
->>>>>>> 123b7e2262be6def780a258e14178f06653e41a1
 
 const Stack = createStackNavigator();
 
