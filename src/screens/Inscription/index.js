@@ -37,9 +37,8 @@ const index = ({ navigation, route }) => {
   useEffect(() => {
     setUserData(user);
   }, []);
-  const handleImageEvent = (result) => {
-    setImage(result.uri);
-  };
+  const handleImageEvent = (result) => setImage(result.uri);
+
   const removeImage = () => setImage(null);
   const executeInscription = ({ url }) => {
     const data = { certificado: certificate, voucher: url };
