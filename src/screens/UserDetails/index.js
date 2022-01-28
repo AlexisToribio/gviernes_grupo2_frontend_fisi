@@ -57,6 +57,7 @@ const index = ({ navigation }) => {
   useEffect(() => {
     getUserData({ token })
       .then((res) => {
+        dispatch({ type: "UPDATE_USER", payload: res.data });
         setUserData(res.data);
       })
       .catch((err) => {
@@ -67,6 +68,7 @@ const index = ({ navigation }) => {
     const data = { ...userData, foto: "" };
     updateUserData({ id: userData.id, data, token })
       .then((res) => {
+        dispatch({ type: "UPDATE_USER", payload: data });
         alert("Datos actualizados");
       })
       .catch((err) => console.error(err));
@@ -139,8 +141,11 @@ const index = ({ navigation }) => {
               onValueChange={(value, i) =>
                 setUserData({ ...userData, sexo: value })
               }
-              selectedValue={userData?.sexo}
+              selectedValue={
+                !userData || !userData?.sexo ? "0" : userData?.sexo
+              }
             >
+              <Picker.Item label="--seleccione--" value="0" />
               <Picker.Item label="Masculino" value="Masculino" />
               <Picker.Item label="Femenino" value="Femenino" />
             </Picker>

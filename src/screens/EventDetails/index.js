@@ -43,7 +43,10 @@ const index = ({ navigation, route }) => {
       });
   }, []);
   const onPress = () =>
-    navigation.navigate("Inscription", { title: event.titulo });
+    navigation.navigate("Inscription", {
+      title: event.titulo,
+      id: route.params.id,
+    });
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
@@ -64,7 +67,7 @@ const index = ({ navigation, route }) => {
         <Image
           style={styles.portada}
           source={{
-            uri: "https://ipmark.com/wp-content/uploads/eventos-de-marketing-2021.jpg",
+            uri: event?.logo,
           }}
         />
         <Text style={styles.title}>{event?.titulo}</Text>
@@ -110,7 +113,9 @@ const index = ({ navigation, route }) => {
             <Text style={styles.containerInput}>{event?.tipo_ambiente}</Text>
           </View>
         </View>
-        <ButtonConfirm text="Inscribirme" onPress={onPress} />
+        {route?.params.inscription && (
+          <ButtonConfirm text="Inscribirme" onPress={onPress} />
+        )}
       </ScrollView>
     </View>
   );

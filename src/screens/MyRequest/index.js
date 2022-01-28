@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import { HomeLayoutAlternative, Input } from "../../components";
+import { HomeLayoutAlternative, Input, Loader } from "../../components";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 import { getRequests } from "../../services/getRequests";
@@ -34,49 +34,59 @@ const index = ({ navigation }) => {
   const onChange = (val) => setValue(val);
 
   return (
-    
     <HomeLayoutAlternative navigation={navigation}>
       <ScrollView>
-        <View>
-          <Text style={styles.title}>Lista de Solicitudes</Text>
-        </View>
-        <View style={styles.search_container}>
-          <Input
-            onChange={onChange}
-            value={value}
-            icon="search"
-            placeholder="Nro Expediente"
-          />
-        </View>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          filteredRequests?.map((request) => (
-            <View style={styles.request} key={request.id}>
-              <View style={styles.request_col}>
-                <Text>{request.id}</Text>
-              </View>
-              <View style={styles.request_col}>
-                <Text>{request.titulo}</Text>
-              </View>
-              <View style={styles.request_col}>
-                <Icon name="calendar" size={25} style={styles.icon} />
-                <Text style={{ marginLeft: 10 }}>{request.fecha_envio}</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("RequestDetails", {
-                    id: request.id,
-                  })
-                }
-              >
+        <View style={{ minHeight: 800 }}>
+          <View>
+            <Text style={styles.title}>Lista de Solicitudes</Text>
+          </View>
+          <View style={styles.search_container}>
+            <Input
+              onChange={onChange}
+              value={value}
+              icon="search"
+              placeholder="Titulo de evento"
+            />
+          </View>
+          {loading ? (
+            <Loader />
+          ) : (
+            filteredRequests?.map((request) => (
+              <View style={styles.request} key={request.id}>
                 <View style={styles.request_col}>
-                  <Icon name="file" size={25} style={styles.icon} />
+                  <Text>{request.id}</Text>
                 </View>
-              </TouchableOpacity>
-            </View>
-          ))
-        )}
+                <View style={styles.request_col}>
+                  <Text
+                    style={{
+                      width: 120,
+                      overflow: "hidden",
+                      height: 18,
+                      fontSize: 12,
+                    }}
+                  >
+                    {request.titulo}
+                  </Text>
+                </View>
+                <View style={styles.request_col}>
+                  <Icon name="calendar" size={25} style={styles.icon} />
+                  <Text style={{ marginLeft: 10 }}>{request.fecha_envio}</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("RequestDetails", {
+                      id: request.id,
+                    })
+                  }
+                >
+                  <View style={styles.request_col}>
+                    <Icon name="file" size={25} style={styles.icon} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            ))
+          )}
+        </View>
       </ScrollView>
     </HomeLayoutAlternative>
   );

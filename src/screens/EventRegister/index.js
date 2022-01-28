@@ -17,6 +17,7 @@ import styles from "./styles";
 import { Picker } from "@react-native-picker/picker";
 import { sendEventRequest } from "../../services/sendEventRequest";
 import { useUser } from "../../hooks/useUser";
+import { upload } from "../../services/uploadImage";
 
 const InputLayout = ({ children, label }) => (
   <View style={{ width: "100%" }}>
@@ -38,6 +39,7 @@ const InputLayout = ({ children, label }) => (
 const index = ({ navigation }) => {
   const [{ token }, _] = useUser();
   const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
   const [data, setData] = useState({
     titulo: "",
     tipo_coordinador: 0,
@@ -56,15 +58,15 @@ const index = ({ navigation }) => {
     participantes: 0,
     logo: "",
   });
-
-  const handleSend = () => {
-    const dataToSend = { ...data, logo: image };
+  const sendData = ({ url }) => {
+    const dataToSend = { ...data, logo: url };
     sendEventRequest({
       data: dataToSend,
       token,
     })
       .then((data) => {
         if (data === "Event Registered and Request Created") {
+          console.log(data);
           alert("Registro de solicitud exitoso");
           navigation.navigate("MyRequest");
         } else {
@@ -72,6 +74,9 @@ const index = ({ navigation }) => {
         }
       })
       .catch((err) => console.error(err.message));
+  };
+  const handleSend = () => {
+    upload({ image, callback: sendData });
   };
 
   const handleImageEvent = (result) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import { ButtonConfirm, Card, HomeLayout } from "../../components";
+import { ScrollView, View, Text } from "react-native";
+import { ButtonConfirm, Card, HomeLayout, Loader } from "../../components";
 import { useUser } from "../../hooks/useUser";
 import { getMyEvents } from "../../services/getMyEvents";
 import styles from "./styles";
@@ -27,9 +27,7 @@ const index = ({ navigation }) => {
       <ScrollView>
         <View style={styles.container}>
           {loading ? (
-            <View>
-              <Text>Loading...</Text>
-            </View>
+            <Loader />
           ) : events.length < 1 ? (
             <View>
               <Text style={{ textAlign: "center", fontSize: 21 }}>
@@ -44,14 +42,15 @@ const index = ({ navigation }) => {
             events.map((card) => {
               return (
                 <Card
-                  // image={card.logo}
-                  image="https://www.toulouselautrec.edu.pe/sites/default/files/imagenes/cursos/toulouse-cursos-org-eventos-desktop-37.jpg"
+                  image={card.logo}
+                  // image="https://www.toulouselautrec.edu.pe/sites/default/files/imagenes/cursos/toulouse-cursos-org-eventos-desktop-37.jpg"
                   title={card.titulo}
                   date={card.fecha_inicio}
                   price={card.precio_inscripcion}
                   key={card.id}
                   id={card.id}
                   navigation={navigation}
+                  inscription={false}
                 />
               );
             })

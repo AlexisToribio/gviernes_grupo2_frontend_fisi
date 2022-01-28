@@ -58,7 +58,7 @@ const index = ({ navigation, route }) => {
         <Image
           style={styles.portada}
           source={{
-            uri: "https://ipmark.com/wp-content/uploads/eventos-de-marketing-2021.jpg",
+            uri: request?.logo,
           }}
         />
         <InputLayout label={request?.codigo}></InputLayout>
@@ -153,6 +153,14 @@ const index = ({ navigation, route }) => {
             {request?.observaciones || ""}
           </Text>
         </InputLayout>
+        {/* <InputLayout label="Estado de solicitud"> */}
+        {/* <Text style={styles.containerInput}> */}
+        {/* {request?.estado === 1 && "Cancelado"} */}
+        {/* {request?.estado === 2 && "Aprobado"} */}
+        {/* {request?.estado == 3 && <Text>Pendiente</Text>} */}
+        {/* {request?.estado === 4 && "Completo"} */}
+        {/* </Text> */}
+        {/* </InputLayout> */}
       </ScrollView>
     </View>
   );

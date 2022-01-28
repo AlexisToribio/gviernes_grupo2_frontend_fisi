@@ -25,6 +25,7 @@ const index = ({ navigation }) => {
     userRegister({ data })
       .then((res) => {
         if (res === "Register was successful") {
+          console.log(res);
           setData({
             nombres: "",
             apellidos: "",

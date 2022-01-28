@@ -1,8 +1,8 @@
 import { clientApi } from "../lib/axios";
 
-export const getEventDetails = ({ token, id }) => {
+export const inscription = ({ token, idevent, data }) => {
   return clientApi
-    .get(`/dashboard/events/details/${id}`, {
+    .post(`dashboard/events/inscription/${idevent}`, data, {
       headers: {
         token,
       },
