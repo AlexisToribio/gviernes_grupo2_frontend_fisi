@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button, TouchableOpacity, ScrollView } from "react-native";
 import {
   HomeInput,
@@ -7,7 +7,9 @@ import {
 } from "../../components";
 import { Picker } from "@react-native-picker/picker";
 import styles from "./styles";
-import { uploadImage } from "../../services/uploadImage";
+import { upload } from "../../services/uploadImage";
+import { inscription } from "../../services/inscription";
+import { useUser } from "../../hooks/useUser";
 
 const InputLayout = ({ children, label }) => (
   <View style={{ width: "100%" }}>
@@ -28,17 +30,44 @@ const InputLayout = ({ children, label }) => (
 );
 
 const index = ({ navigation, route }) => {
+  const [certificate, setCertificate] = useState(-1);
   const [image, setImage] = useState(null);
-  const handleImageEvent = (result) => {
-    setImage(result.uri);
-    console.log(result);
-    // uploadImage({ file: result })
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.error(err));
-  };
-  const removeImage = () => setImage(null);
+  const [{ token, user }, _] = useUser();
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    setUserData(user);
+  }, []);
+  const handleImageEvent = (result) => setImage(result.uri);
 
-  const executeInscription = () => {};
+  const removeImage = () => setImage(null);
+  const executeInscription = ({ url }) => {
+    const data = { certificado: certificate, voucher: url };
+    inscription({ token, idevent: route.params.id, data })
+      .then((res) => {
+        console.log(res);
+        if (res.message === "User already registered")
+          alert("Ya se encuentra registrado");
+        else if (res.message === "User Data Imcomplete")
+          alert(
+            "Datos incompletos, dirigase al apartado de usuario y complete sus datos"
+          );
+        else {
+          alert("Registro exitoso");
+          navigation.navigate("MyEvents");
+        }
+      })
+      .catch((err) => alert("Error al realizar inscripción"));
+  };
+
+  const handleInscription = () => {
+    if (certificate < 0) {
+      alert("Elija opcion para entrega de certificado");
+    } else if (!image) {
+      alert("Adjunte un voucher");
+    } else {
+      upload({ image, callback: executeInscription });
+    }
+  };
   return (
     <HomeLayoutAlternative navigation={navigation}>
       <ScrollView
@@ -62,50 +91,69 @@ const index = ({ navigation, route }) => {
           <View style={{ height: 5, backgroundColor: "gray" }}></View>
           <View style={styles.formItem}>
             <InputLayout>
-              <HomeInput label="Nombres" />
+              <HomeInput
+                label="Nombres"
+                value={userData?.nombres}
+                editable={false}
+              />
             </InputLayout>
           </View>
           <View style={styles.formItem}>
             <InputLayout>
-              <HomeInput label="Apellidos" />
+              <HomeInput
+                label="Apellidos"
+                value={userData?.apellidos}
+                editable={false}
+              />
             </InputLayout>
           </View>
           <View style={styles.formItem}>
             <InputLayout>
-              <HomeInput label="Correo" />
+              <HomeInput
+                label="Correo"
+                value={userData?.email}
+                editable={false}
+              />
             </InputLayout>
           </View>
           <View style={styles.formItem}>
             <InputLayout>
-              <HomeInput label="DNI/Carné extranjería" />
+              <HomeInput
+                label="Edad"
+                value={userData?.edad ? String(userData?.edad) : ""}
+                editable={false}
+              />
             </InputLayout>
           </View>
           <View style={styles.formItem}>
             <InputLayout>
-              <HomeInput label="Número de celular" />
+              <HomeInput
+                label="Sexo"
+                value={userData?.sexo || ""}
+                editable={false}
+              />
             </InputLayout>
           </View>
           <View style={styles.formItem}>
             <InputLayout>
-              <HomeInput label="Sexo" />
+              <HomeInput
+                label="Ocupación"
+                value={userData?.ocupacion || ""}
+                editable={false}
+              />
             </InputLayout>
           </View>
-          <View style={styles.formItem}>
-            <InputLayout>
-              <HomeInput label="Ocupación" />
-            </InputLayout>
-          </View>
-          <View style={styles.formItem}>
-            <InputLayout>
-              <HomeInput label="Edad" />
-            </InputLayout>
-          </View>
+
           <View style={{ width: "100%", marginLeft: 78 }}>
             <InputLayout label="Certificado">
               <View style={styles.picker}>
-                <Picker>
-                  <Picker.Item label="Sí" value="si" />
-                  <Picker.Item label="No" value="no" />
+                <Picker
+                  onValueChange={(val) => setCertificate(val)}
+                  selectedValue={certificate}
+                >
+                  <Picker.Item label="--seleccione--" value={-1} />
+                  <Picker.Item label="Sí" value={0} />
+                  <Picker.Item label="No" value={1} />
                 </Picker>
               </View>
             </InputLayout>
@@ -114,19 +162,22 @@ const index = ({ navigation, route }) => {
                 <ImagePicker handleImage={handleImageEvent} />
               ) : (
                 <TouchableOpacity onPress={removeImage}>
-                  <Text>Remover voucher</Text>
+                  <Text
+                    style={{
+                      marginVertical: 10,
+                      color: "#F90909",
+                      borderColor: "#F90909",
+                      borderWidth: 1,
+                      paddingVertical: 5,
+                      width: "50%",
+                      paddingHorizontal: 5,
+                      borderRadius: 4,
+                    }}
+                  >
+                    Remover voucher
+                  </Text>
                 </TouchableOpacity>
               )}
-            </InputLayout>
-            <InputLayout label="¿Por dónde se enteró del evento?">
-              <View style={styles.picker}>
-                <Picker>
-                  <Picker.Item label="Radio" value="radio" />
-                  <Picker.Item label="Televisión" value="tv" />
-                  <Picker.Item label="Flyer" value="flyer" />
-                  <Picker.Item label="Otro medio" value="otro" />
-                </Picker>
-              </View>
             </InputLayout>
           </View>
           <View
@@ -138,11 +189,17 @@ const index = ({ navigation, route }) => {
               marginBottom: 10,
             }}
           >
-            <Button color="#F90909" title="Cancelar" />
+            <Button
+              color="#F90909"
+              title="Cancelar"
+              onPress={() =>
+                navigation.navigate("EventDetails", { inscription: true })
+              }
+            />
             <Button
               color="#5AD65A"
               title="Inscribirme"
-              onPress={executeInscription}
+              onPress={handleInscription}
             />
           </View>
         </View>

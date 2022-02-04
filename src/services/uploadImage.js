@@ -1,12 +1,33 @@
-// import { uploadFile } from "react-s3";
-// import AWS from 'aws-sdk'
-// const bucket = new AWS.S3({
-//     Bucket: "sgea-movil",
-//     accessKeyId: "AKIAZQKE3KRCUFXQHSPM",
-//     secretAccessKey: "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",
-//   })
+import firebase from "firebase";
+export const upload = async ({ image, callback }) => {
+  const blob = await new Promise((res, rej) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      res(xhr.response);
+    };
+    xhr.onerror = function () {
+      rej(new TypeError("network error"));
+    };
+    xhr.responseType = "blob";
+    xhr.open("GET", image, true);
+    xhr.send(null);
+  });
 
-export const uploadImage = ({ file }) => {
-  //   return
-  //   bucket.upload()
+  const ref = firebase.storage().ref().child(new Date().toISOString());
+  const snapshot = ref.put(blob);
+  snapshot.on(
+    firebase.storage.TaskEvent.STATE_CHANGED,
+    () => {},
+    (error) => {
+      blob.close();
+      return;
+    },
+    () =>
+      snapshot.snapshot.ref.getDownloadURL().then((url) => {
+        console.log({ url });
+        callback({ url });
+        blob.close();
+        return url;
+      })
+  );
 };

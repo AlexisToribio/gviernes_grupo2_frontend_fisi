@@ -6,6 +6,12 @@ export const reducer = (state, action) => {
         token: action.payload,
       };
     }
+    case "UPDATE_USER": {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
     default:
       return state;
   }

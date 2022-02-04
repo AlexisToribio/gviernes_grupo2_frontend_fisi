@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ScrollView, View, Text, Image } from "react-native";
-import { Card, HomeLayout } from "../../components";
+import { Card, HomeLayout, Loader } from "../../components";
 import { useUser } from "../../hooks/useUser";
 import { getEvents } from "../../services/getEvents";
 import styles from "./styles";
@@ -13,6 +13,7 @@ const index = ({ navigation }) => {
     setLoading(true);
     getEvents({ token })
       .then((res) => {
+        console.log(res.data);
         setLoading(false);
         setEvents(res.data);
       })
@@ -23,18 +24,16 @@ const index = ({ navigation }) => {
 
   return (
     <HomeLayout title="Eventos">
-      <ScrollView style={{ minHeight: 1000 }}>
+      <ScrollView>
         <View style={styles.container}>
           {loading ? (
-            <View>
-              <Text>Loading...</Text>
-            </View>
+            <Loader />
           ) : (
             events.map((card) => {
               return (
                 <Card
-                  // image={card.logo}
-                  image="https://www.toulouselautrec.edu.pe/sites/default/files/imagenes/cursos/toulouse-cursos-org-eventos-desktop-37.jpg"
+                  image={card.logo}
+                  // image="https://www.toulouselautrec.edu.pe/sites/default/files/imagenes/cursos/toulouse-cursos-org-eventos-desktop-37.jpg"
                   title={card.titulo}
                   date={card.fecha_inicio}
                   price={card.precio_inscripcion}

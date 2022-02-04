@@ -20,11 +20,14 @@ const index = ({ navigation }) => {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const onPress = () => {
+    if (!data.nombres || !data.apellidos || !data.email || !data.password)
+      return alert("Complete todos los campos");
     if (data.password !== confirmPassword)
       return alert("Contraseñas son diferentes");
     userRegister({ data })
       .then((res) => {
         if (res === "Register was successful") {
+          console.log(res);
           setData({
             nombres: "",
             apellidos: "",

@@ -9,3 +9,4 @@ export { default as AuthLayout } from "./AuthLayout";
 export { default as HomeLayoutAlternative } from "./HomeLayoutAlternative";
 export { default as ImagePicker } from "./ImagePicker";
 export { default as ButtonConfirm } from "./ButtonConfirm";
+export { default as Loader } from "./Loader";

@@ -8,12 +8,14 @@ const index = ({
   placeholder = "",
   multiline = false,
   keyboardType = "default",
+  editable = true,
 }) => {
   return (
     <View style={styles.containerInput}>
       {label && <Text style={styles.label}>{label}</Text>}
 
       <TextInput
+        editable={editable}
         keyboardType={keyboardType}
         value={value}
         onChangeText={onChange}

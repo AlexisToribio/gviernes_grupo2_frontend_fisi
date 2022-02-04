@@ -24,11 +24,15 @@ const index = ({
         <View style={styles.footer}>
           <Text style={styles.text}>
             Precio:{" "}
-            <Text style={styles.price}>{!price ? " Gratis" : price}</Text>
+            <Text style={styles.price}>
+              {!price ? " Gratis" : `S/. ${price}`}
+            </Text>
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("EventDetails", { id })}
+            onPress={() =>
+              navigation.navigate("EventDetails", { id, inscription })
+            }
           >
             <Text style={styles.textButton}>Asistir</Text>
           </TouchableOpacity>
@@ -37,7 +41,9 @@ const index = ({
         <View style={{ marginTop: 20 }}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("EventDetails", { id })}
+            onPress={() =>
+              navigation.navigate("EventDetails", { id, inscription })
+            }
           >
             <Text style={styles.textButton}>Ver detalles</Text>
           </TouchableOpacity>
