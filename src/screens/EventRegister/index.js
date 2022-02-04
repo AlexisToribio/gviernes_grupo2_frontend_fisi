@@ -76,6 +76,21 @@ const index = ({ navigation }) => {
       .catch((err) => console.error(err.message));
   };
   const handleSend = () => {
+    console.log(data);
+    if (
+      !data.titulo ||
+      !data.nombre_coordinador ||
+      !data.tipo_evento ||
+      !data.tipo_ambiente ||
+      !data.tipo_certificado ||
+      !data.descripcion ||
+      !data.precio_certificado ||
+      !data.hora_inicio ||
+      !data.fecha_fin ||
+      !data.fecha_inicio
+    )
+      return alert("Complete todos los campos");
+    if (!image) return alert("Adjunte un logo");
     upload({ image, callback: sendData });
   };
 

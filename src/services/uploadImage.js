@@ -24,6 +24,7 @@ export const upload = async ({ image, callback }) => {
     },
     () =>
       snapshot.snapshot.ref.getDownloadURL().then((url) => {
+        console.log({ url });
         callback({ url });
         blob.close();
         return url;

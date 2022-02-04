@@ -51,40 +51,44 @@ const index = ({ navigation }) => {
           {loading ? (
             <Loader />
           ) : (
-            filteredRequests?.map((request) => (
-              <View style={styles.request} key={request.id}>
-                <View style={styles.request_col}>
-                  <Text>{request.id}</Text>
-                </View>
-                <View style={styles.request_col}>
-                  <Text
-                    style={{
-                      width: 120,
-                      overflow: "hidden",
-                      height: 18,
-                      fontSize: 12,
-                    }}
-                  >
-                    {request.titulo}
-                  </Text>
-                </View>
-                <View style={styles.request_col}>
-                  <Icon name="calendar" size={25} style={styles.icon} />
-                  <Text style={{ marginLeft: 10 }}>{request.fecha_envio}</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("RequestDetails", {
-                      id: request.id,
-                    })
-                  }
-                >
+            <View>
+              {filteredRequests?.map((request) => (
+                <View style={styles.request} key={request.id}>
                   <View style={styles.request_col}>
-                    <Icon name="file" size={25} style={styles.icon} />
+                    <Text>{request.id}</Text>
                   </View>
-                </TouchableOpacity>
-              </View>
-            ))
+                  <View style={styles.request_col}>
+                    <Text
+                      style={{
+                        width: 120,
+                        overflow: "hidden",
+                        height: 18,
+                        fontSize: 12,
+                      }}
+                    >
+                      {request.titulo}
+                    </Text>
+                  </View>
+                  <View style={styles.request_col}>
+                    <Icon name="calendar" size={25} style={styles.icon} />
+                    <Text style={{ marginLeft: 10 }}>
+                      {request.fecha_envio}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("RequestDetails", {
+                        id: request.id,
+                      })
+                    }
+                  >
+                    <View style={styles.request_col}>
+                      <Icon name="file" size={25} style={styles.icon} />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
           )}
         </View>
       </ScrollView>

@@ -22,6 +22,7 @@ export default styles = StyleSheet.create({
     width: 360,
     borderWidth: 2,
     borderRadius: 5,
+    borderColor: "black",
     backgroundColor: "white",
     flex: 1,
     flexDirection: "row",

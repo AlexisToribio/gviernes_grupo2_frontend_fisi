@@ -8,7 +8,6 @@ export default styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   title: { fontSize: 20, color: "black", textAlign: "center" },
-  //image: { height: 200, width: 200, borderRadius: 100, resizeMode: "contain" },
   button: {
     backgroundColor: "gray",
     width: "35%",
